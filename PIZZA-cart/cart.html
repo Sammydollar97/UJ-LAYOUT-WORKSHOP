@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><Pizza-perfect></title>
+    <link rel="stylesheet" href="style.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+
+<style>
+    body {
+        background-color: yellowgreen
+    }
+
+    .pizza {
+        background-color: #c7f9cc; border-radius: 1em;
+    }
+
+    .pizza {
+        
+        padding: 5px;
+        margin-bottom: 5px;
+        border-radius: 1em;
+        margin: 2px;
+
+    }
+
+    .large {
+        background-color: #38A3A5
+        
+    }
+
+    .medium {
+        background-color: #80ed99;
+        
+    }
+
+    .small {
+        background-color: #57CC99
+        
+    }
+
+    .header {
+        margin-bottom: 20px;
+
+    }
+
+    .footer {
+        background-color: #22577A;
+    }
+
+    .align {
+        text-align: center;
+    }
+
+    
+
+     @media(min-width: 960px) {
+.pizzas {
+    display: flexbox;
+    background-color: red
+}
+.X{
+    display: flex;
+}
+       }
+</style>
+<body>
+    
+    <div class="highest" x-data="{showCart: false, 
+        largeTotal: 0, largeQty:0,
+         mediumTotal: 0, mediumQty:0, 
+         smallTotal: 0, smallQty:0, 
+         paymentAmount: 0,
+         paymentMessage: '',
+         cartTotal(){
+            return this.largeTotal + this.mediumTotal + this.smallTotal;
+         },
+
+         makePayment(){
+            if (!this.paymentAmount){
+                this.paymentMessage = 'Oops, amount added!'
+            }
+            if (this.paymentAmount >= this.cartTotal() ){
+                this.paymentMessage = 'PAYMENT APPROVED'
+                setTimeout(() => {
+                    this.payNow = false;
+                    this.clearCart()
+                },3000);
+            }
+                
+                else{
+                    this.paymentMessage = 'PAYMENT DECLINED! TRY AGAIN!!!';
+                }
+         },
+         clearCart(){
+           this.largeTotal= 0;
+           this.largeQty = 0;
+           this.mediumTotal = 0;
+           this.mediumQty = 0 ;
+           this.smallTotal = 0; 
+           this.smallQty = 0; 
+         }
+        }">
+         
+        
+        <div class="Head">
+            <h1> MONATE PERFECT PIZZA</h1>
+        </div>
+ <h2 style="color: rgb(119, 23, 128);">Monate pizza,taste like heaven</h2>
+        
+        
+        <div class="cartb" >
+            <div>
+                <button x-on:click="showCart=false">
+                    <img src="basket.png.jpg" width="75" alt="">
+                    Close cart 
+                </button>  
+            
+            </div>
+            <table style="width:30%;">
+                <tr>
+                <td> <strong>Small</strong></td>
+                
+                <td><span x-text="smallQty"></span></td>
+                <td> <button x-on:click="smallTotal+=25; smallQty+=1; ">+</button> </td>
+                <td> <button x-on:click="if(smallQty>0){smallTotal-=25; smallQty-=1}">-</button> </td>
+                <td><span>R</span></td>
+                <td x-text="smallTotal"></td>
+                </tr>
+                
+                <tr>
+                    <td> <strong>Medium</strong></td>
+                    <td><span x-text="mediumQty"></span></td>
+                    <td> <button @click="mediumTotal+=89; mediumQty+=1;">+</button> </td>
+                    <td> <button @click="if(mediumTotal>0){mediumTotal-=89; mediumQty-=1}">-</button> </td>
+                    <td><span>R</span></td>
+                    <td x-text="mediumTotal"></td>
+                    </tr>
+                
+                    <tr>
+                        <td> <strong>Large</strong></td>
+                        <td><span x-text="largeQty"></span></td>
+                        <td> <button @click="largeTotal+=129; largeQty+=1;">+</button> </td>
+                        <td> <button @click="if(largeQty > 0) {largeTotal-=129; largeQty-=1}">-</button> </td>
+                        <td><span>R</span></td>
+                        <td x-text ="largeTotal"></td>
+                        </tr>
+                        <tr>
+                            <td> <strong>Total cost</strong></td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <b><strong> <td><span>R</span></td></strong></b>
+                         <b> <strong> <td  x-text="cartTotal()" ></td></strong></b>
+                            </tr>
+                </table>
+                       <div >
+                       <div class="message" x-text="paymentMessage"> </div>
+                        <label for="">Payment Amount</label>
+                        <input class="input" type="number" placeholder="Payment amount" x-model="paymentAmount">
+                        <button x-on:click="makePayment" class="btnn">PAYMENT</button>
+                </div>
+            </div>
+    <div class="X" >
+            <div class= "pizza small pizza" >
+            <h2>small pizza</h2>
+            <img src="monate pizza 2.png" alt="" width="100" >
+            <h3>R25.00</h3>
+            <div> Creamy chicken
+                  mashroom and herbs,
+                  tossed in penne pasta, 
+                  tapped in mozzarella & cheddar cheese
+                </div>
+                <div style="text-align: center; padding: 40px; padding-top: 70px;"> 
+                    <button style="font-size:large; width:150px;" x-on:click="smallTotal+=25; smallQty+=1;">Buy</button> 
+                </div>
+            </div>
+
+            
+        
+        <div class="pizza large pizza">
+            <h2>Large Pizza</h2>
+            <img src="brown pizza.png" alt="" width="200">
+            <h3>R129</h3>
+            <div> Peri-Peri chicken
+    
+                <span>mayo tossed in penne pasta,</span> 
+    
+                tapped in mozzarella & cheddar cheese</div>
+                <div style="text-align: center; padding: 40px; padding-top: 70px;"> 
+                    <button style="font-size:large; width:150px;" @click="largeTotal+=129; largeQty+=1;">Buy</button> 
+                </div>
+    
+        </div>
+        <div class="pizza medium pizza" >
+            <h2>medium pizza</h2>
+            <img src="monate pizza 1.png" alt="" width="150">
+            <div class="pizza">
+    
+                <h3>R89.00</h3>
+                creamy chicken
+                    mashroom and herbs,
+                    tossed in penne pasta, 
+                    tapped in mozzarella & cheddar cheese
+                    </div>
+                    <div style="text-align: center; padding: 40px; padding-top: 70px;"> 
+                        <button style="font-size:large; width:150px;" @click="mediumTotal+=89; mediumQty+=1;showCheckout=true; showCart=true;">Buy</button> 
+                    </div>
+        
+                </div>
+        </div>
+        <div class="pizza footer">
+            <h2>contact details</h2>
+            0727345758  info@pizzaFf.com
+            <h2>facebook</h2>
+            sammydollar97
+            <h3>instagram</h3>
+            Mr PIZZA
+    
+    
+        </div>
+    </div>
+    
+    </body>
+    
+    </html>
